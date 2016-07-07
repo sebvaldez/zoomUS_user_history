@@ -23,7 +23,10 @@ default: &default
 
 development:
   <<: *default
+  host: localhost
   database: solar_zoom_history_development
+  username: solar_history
+  password: hist0ry
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
