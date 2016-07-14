@@ -2,6 +2,8 @@ class CreateParticitants < ActiveRecord::Migration
   def change
     create_table :participants do |t|
       t.integer :meeting_id
+      t.string :uuid
+      t.string :id_of_meeting
       t.string :user_name
       t.string :device
       t.string :ip_address
