@@ -5,9 +5,9 @@ class CreateUsers < ActiveRecord::Migration
       t.string :first_name
       t.string :last_name
       t.string :email
-      t.boolean :enable_large
+      t.boolean :enable_large, :default=> false
       t.integer :large_capacity
-      t.boolean :enable_webinar
+      t.boolean :enable_webinar, :default=> false
       t.integer :webinar_capacity
       t.string :pmi
 
