@@ -1,5 +1,6 @@
 class Meeting < ActiveRecord::Base
-  belongs_to :users
-  has_many :participants
+	validates :uuid, presence: true, uniqueness: true
+	belongs_to :users
+	has_many :participants
 
 end

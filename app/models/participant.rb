@@ -1,3 +1,5 @@
 class Participant < ActiveRecord::Base
-  belongs_to :meetings
+	validates :join_time, presence: true, uniqueness: true
+	belongs_to :meetings
+
 end
