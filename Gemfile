@@ -25,7 +25,13 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # ADDED BY ME:
 gem 'httparty'
+# Representable maps Ruby objects to documents and back
+gem 'representable'
+# dependency for representable
+gem 'multi_json'
 
+gem 'rspec'
+gem 'rspec-rails'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
