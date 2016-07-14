@@ -59,29 +59,19 @@ namespace :zoom do
 
   desc "Creates users from zoom and loads to dev db, takes count"
   task :load_users, [:number] => :environment do |items, args|
-    user = ''
+
     # Create url to POST to zoom
     url = zoomAPI('user/list', :page_size => args.number)
 
-    print "Rake will load #{args.number} zoom users into the db"
-    print "\n"
+    print "Rake will load #{args.number} zoom users into the db \n"
     # Print toal number of users
     response = HTTParty.post( url )
-    print "Zooms current total users are #{response['total_records']}"
-    print "\n"
+    print "Zooms current total users are #{response['total_records']} \n"
+
     # Create a user from the zoom USER list
     response['users'].each do |user|
-      user = User.new(
-      :zoom_id=>user['id'],
-      :first_name =>user['first_name'],
-      :last_name =>user['last_name'],
-      :email =>user['email'],
-      :pmi =>user['pmi'],
-      :enable_large =>user['enable_large'],
-      :large_capacity =>user['large_capacity'],
-      :enable_webinar =>user['enable_webinar'],
-      :webinar_capacity =>user['webinar_capacity']
-      )
+      # Create new user instance
+      user = User.new().extend(UserRepresenter).from_hash(user)
       #Validate if the user exists in the database
       if user.valid?
         user.save
