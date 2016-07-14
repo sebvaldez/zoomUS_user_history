@@ -10,7 +10,7 @@ class CreateUsers < ActiveRecord::Migration
       t.boolean :enable_webinar, :default=> false
       t.integer :webinar_capacity
       t.string :pmi
-
+      t.boolean :status, :default => true   # to show if user exists/Live
       t.timestamps null: false
     end
     add_index :users, :zoom_id

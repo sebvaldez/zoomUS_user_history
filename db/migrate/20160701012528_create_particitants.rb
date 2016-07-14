@@ -12,5 +12,6 @@ class CreateParticitants < ActiveRecord::Migration
       t.datetime :join_time
       t.datetime :leave_time
     end
+    add_index :participants, :uuid
   end
 end

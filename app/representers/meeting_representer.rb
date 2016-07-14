@@ -10,9 +10,10 @@ module MeetingRepresenter
 	property :id_of_meeting, as: :id
 	property :start_time
 	property :end_time
-	property :duration
 	property :participant_count, as: :participants
 	property :has_pstn
 	property :has_voip
+	property :has_video
 	property :has_screen_share
+	property :recording
 end

@@ -5,17 +5,17 @@ class CreateMeetings < ActiveRecord::Migration
       t.string :uuid
       t.string :host_email
       t.string :id_of_meeting
-      t.string :type
       t.datetime :start_time
       t.datetime :end_time
       t.integer :participant_count
-
-      t.string :duration
-      t.boolean :has_pstn
-      t.boolean :has_voip
+      t.boolean :has_pstn, :default => false
+      t.boolean :has_voip, :default => false
+      t.boolean :has_video, :default => false
       t.boolean :has_screen_share, :default => false
+      t.integer :recording
 
     end
     add_index :meetings, :host_email
+    add_index :meetings, :uuid
   end
 end

@@ -18,17 +18,26 @@ ActiveRecord::Schema.define(version: 20160707020903) do
 
   create_table "meetings", force: :cascade do |t|
     t.integer  "user_id"
+    t.string   "uuid"
     t.string   "host_email"
+    t.string   "id_of_meeting"
     t.datetime "start_time"
     t.datetime "end_time"
-    t.string   "uuid"
     t.integer  "participant_count"
+    t.boolean  "has_pstn",          default: false
+    t.boolean  "has_voip",          default: false
+    t.boolean  "has_video",         default: false
+    t.boolean  "has_screen_share",  default: false
+    t.integer  "recording"
   end
 
   add_index "meetings", ["host_email"], name: "index_meetings_on_host_email", using: :btree
+  add_index "meetings", ["uuid"], name: "index_meetings_on_uuid", using: :btree
 
   create_table "participants", force: :cascade do |t|
     t.integer  "meeting_id"
+    t.string   "uuid"
+    t.string   "id_of_meeting"
     t.string   "user_name"
     t.string   "device"
     t.string   "ip_address"
@@ -38,18 +47,21 @@ ActiveRecord::Schema.define(version: 20160707020903) do
     t.datetime "leave_time"
   end
 
+  add_index "participants", ["uuid"], name: "index_participants_on_uuid", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "zoom_id"
     t.string   "first_name"
     t.string   "last_name"
     t.string   "email"
-    t.boolean  "enable_large"
+    t.boolean  "enable_large",     default: false
     t.integer  "large_capacity"
-    t.boolean  "enable_webinar"
+    t.boolean  "enable_webinar",   default: false
     t.integer  "webinar_capacity"
     t.string   "pmi"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.boolean  "status",           default: true
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", using: :btree
