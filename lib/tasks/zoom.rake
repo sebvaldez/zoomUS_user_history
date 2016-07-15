@@ -199,8 +199,101 @@ namespace :zoom do
     end
   end
 
+  desc "Update the :status IF users does not exit from zoom, add IF vise versa"
+  task :update_all_users => :environment do
+    print "UPDATING ALL LOCAL DB USERS\n\n"
+    # Get Total users
+    url = zoomAPI('user/list', :page_size=>1)
+    response = HTTParty.post( url )
+    all_users = response['total_records']
+
+    # Get all current zoom users
+    url  = zoomAPI('user/list', :page_size => all_users )
+    response = HTTParty.post( url )
+    all_users = response['users']
+    print "Current Zoom user base is #{all_users.size}\n"
+
+    # Create array of zoom ids
+    all_zoom_ids = []
+    all_users.map{ |user| all_zoom_ids.push( user['id'] ) }
+
+    # Set all Local DB users :status to false
+    User.all.each.map{ |user| user.update_attribute(:status, false) }
+    og_count = User.all.size
+    print "#{og_count} Local DB users status's were mafe false \n"
+
+    # Map and update status on user
+    new_users = [] # array to hold ids of new users
+    not_found = 0
+    all_zoom_ids.map do |id|
+
+      unless user = User.all.find_by(:zoom_id=> id)
+        print "#{id} | NOT FOUND, STATUS FALSE | \n\n"
+        not_found = not_found + 1
+        new_users.push(id)
+      else
+        user.update_attribute(:status, true)        
+      end
+
+    end
+    print "#{new_users.size} not found \n\n"
+    print "#{og_count - User.all.where(:status => true).size} Users are NOW IN-ACTIVE\n\n"
+
+    # Create a user from array
+    new_users.each do |user|
+
+      # Get user hash from zoom
+      url = zoomAPI('user/get', :id => user)
+      response = HTTParty.post( url )
+
+      # Create new user instance
+      new_user = User.new().extend(UserRepresenter).from_hash(response)
+
+      #Validate if the user exists in the database
+      if new_user.valid?
+        new_user.save
+        print "#{new_user['first_name']} Create in Local Database!\n\n"
+      else
+        print "#{new_user.first_name} | #{new_user.zoom_id} NOT ADDED!\n"
+        print "#{new_user['email'].split("@")[0]} - > #{new_user.errors.messages}\n\n"
+      end
+    end
+
+
+
+  end
+
   desc "A test task for debugging"
   task :test, [:word] => :environment do |items, args|
   end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 end
