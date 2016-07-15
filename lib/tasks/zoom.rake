@@ -40,8 +40,6 @@ def valid_time(time)
 end
 ### #### ###
 
-
-
 namespace :zoom do
 
   desc "Get Zoom User ID using email"
@@ -175,33 +173,34 @@ namespace :zoom do
     end
   end
 
-  desc "A test task for debugging"
-  task :test, [:word] => :environment do |items, args|
+  desc "Link User table rows to Meeting table rows on match of email"
+  task :link_usermeetings => :environment do
 
+    # Target only nil user_id meetings
+    meeting_array = Meeting.all.where(:user_id => nil)
 
-    from = ''
-    to = ''
-
-    print month
-    # Get integer of argument month
-    month = Date::ABBR_MONTHNAMES.index(month)
-
+    User.all.each do |user|
+      users_meetings = meeting_array.all.where(:host_email => user.email )
+      users_meetings.map{|meeting| meeting.update_attribute(:user_id, user.id); meeting.save }
+      print "saved #{user.meetings.size} to #{user.email}\n\n"
+    end
   end
 
+  desc "Link Meeting table to participants "
+  task :link_meetingparticipants => :environment do
 
+    # Target only nil meeting_id participants
+    new_participant_array = Participant.all.where(:meeting_id => nil)
 
+    Meeting.all.each do |meeting|
+      participant_array = new_participant_array.all.where(:uuid => meeting.uuid)
+      participant_array.map{|part| part.update_attribute(:meeting_id, meeting.id); part.save}
+      print "Linked #{meeting.participants.size} participants to #{meeting.uuid}\n\n"
+    end
+  end
 
-
-
-
-
-
-
-
-
-
-
-
-
+  desc "A test task for debugging"
+  task :test, [:word] => :environment do |items, args|
+  end
 
 end
