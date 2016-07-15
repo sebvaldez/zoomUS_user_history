@@ -6,7 +6,10 @@ module MeetingRepresenter
 	include Representable::Hash::AllowSymbols
 
 	property :uuid
-	property :host_email, as: :email
+	
+	property :host_email, as: :email,
+		setter: ->(fragment:, represented:, **) { represented.host_email = fragment.downcase }
+
 	property :id_of_meeting, as: :id
 	property :start_time
 	property :end_time
