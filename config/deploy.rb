@@ -37,7 +37,7 @@ set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
 
 # Set env to use output of 'which bundler'
-#set :default_env, { path: "/home/deploy/.rbenv/shims:~/.rbenv/bin:$PATH" }
+set :default_env, { path: "/home/deploy/.rbenv/shims:~/.rbenv/bin:$PATH" }
 
 # Default value for keep_releases is 5
 # set :keep_releases, 5
