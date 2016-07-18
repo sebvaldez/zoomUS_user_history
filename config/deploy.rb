@@ -34,7 +34,10 @@ set :linked_files, %w{config/database.yml config/secrets.yml}
 set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 
 # Default value for default_env is {}
-set :default_env, { path: "/opt/ruby/bin:$PATH" }
+# set :default_env, { path: "/opt/ruby/bin:$PATH" }
+
+# Set env to use output of 'which bundler'
+set :default_env, { path: "/home/deploy/.rbenv/shims:~/.rbenv/bin:$PATH" }
 
 # Default value for keep_releases is 5
 # set :keep_releases, 5
