@@ -11,3 +11,9 @@
 /log/*
 !/log/.keep
 /tmp
+
+#Ignore Database.yml & provide example
+config/database.yml
+
+# Ignore Secrets.yml & provide example
+config/secrets.yml
