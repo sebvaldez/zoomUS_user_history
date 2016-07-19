@@ -55,6 +55,8 @@ GEM
       capistrano (~> 3.1)
       sshkit (~> 1.2)
     capistrano-harrow (0.5.2)
+    capistrano-passenger (0.2.0)
+      capistrano (~> 3.0)
     capistrano-rails (1.1.7)
       capistrano (~> 3.1)
       capistrano-bundler (~> 1.1)
@@ -225,6 +227,7 @@ DEPENDENCIES
   byebug
   capistrano (~> 3.5)
   capistrano-bundler (~> 1.1.2)
+  capistrano-passenger
   capistrano-rails (~> 1.1, >= 1.1.7)
   capistrano-rbenv (~> 2.0, >= 2.0.4)
   coffee-rails (~> 4.1.0)

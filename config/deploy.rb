@@ -4,7 +4,7 @@ lock '3.5.0'
 set :application, 'solar_zoom_history'
 set :repo_url, 'git@github.com:interstellaridea/solar_zoom_history.git'
 
-# set :passenger_reset_with_touch, true
+set :passenger_reset_with_touch, true
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp

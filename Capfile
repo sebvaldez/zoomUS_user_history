@@ -6,7 +6,7 @@ require "capistrano/deploy"
 
 require 'capistrano/bundler'
 require 'capistrano/rails'
-# require 'capistrano/passenger'
+require 'capistrano/passenger'
 
 # If you are using rbenv add these lines:
 # require 'capistrano/rbenv'
