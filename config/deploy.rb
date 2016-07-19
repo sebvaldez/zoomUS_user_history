@@ -54,3 +54,13 @@ namespace :deploy do
   after :publishing, 'deploy:restart'
   after :finishing, 'deploy:cleanup'
 end
+
+# Capfile     
+desc 'Run custom rake tasks from lib/tasks'
+task :rake do
+  rake = fetch(:rake, 'rake')
+  rails_env = fetch(:rails_env, 'production')
+
+  run "cd '#{current_path}' && #{rake} #{rake_task} RAILS_ENV=#{rails_env}"
+end
+
