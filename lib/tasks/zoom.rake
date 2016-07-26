@@ -3,8 +3,8 @@
 # Creates
 def zoomAPI( endpoint, params = {} )
   # Environment Vars
-  apiKey = ENV['Zoom_API_Key']
-  apiSecret = ENV['Zoom_API_Secret']
+  apiKey = ENV['ZOOM_API_KEY']
+  apiSecret = ENV['ZOOM_API_SECRET']
   baseUri = "https://api.zoom.us/"
   dataType = "data_type=JSON"
   version = 'v1/'
@@ -50,7 +50,6 @@ namespace :zoom do
     response = HTTParty.post(url)
     # Save ID
     id = response['id']
-
     print " USER ID is : #{id}"
     print "\n"
   end

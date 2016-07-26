@@ -60,7 +60,6 @@ namespace :deploy do
       within "#{current_path}" do
         with rails_env: :production do
           execute :rake, ENV['task']
-          # !!!see NOTE at end of answer!!!
         end
       end
     end
