@@ -188,7 +188,6 @@ namespace :zoom do
 
   desc "Link Meeting table to participants "
   task :link_meetingparticipants => :environment do
-
     # Target only nil meeting_id participants
     new_participant_array = Participant.all.where(:meeting_id => nil)
 

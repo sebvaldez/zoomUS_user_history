@@ -53,14 +53,19 @@ namespace :deploy do
 
   after :publishing, 'deploy:restart'
   after :finishing, 'deploy:cleanup'
+
+  desc "Invoke rake task that are custom"
+  task :invoke do
+    on roles(:app) do
+      within "#{current_path}" do
+        with rails_env: :production do
+          execute :rake, ENV['task']
+          # !!!see NOTE at end of answer!!!
+        end
+      end
+    end
+  end
+  
 end
 
-# Capfile     
-desc 'Run custom rake tasks from lib/tasks'
-task :rake do
-  rake = fetch(:rake, 'rake')
-  rails_env = fetch(:rails_env, 'production')
-
-  run "cd '#{current_path}' && #{rake} #{rake_task} RAILS_ENV=#{rails_env}"
-end
 
