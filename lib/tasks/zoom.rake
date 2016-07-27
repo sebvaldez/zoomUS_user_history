@@ -104,16 +104,39 @@ namespace :zoom do
     print "You want meetings from : #{from} => #{to} \n"
     print "You said you only want #{args.number} meeting(s) \n"
 
+    # Set page number
+    page_number = 1
+
+    meetingList = []
+
     # Create URL to POST to ZOOM API
     meet_url = zoomAPI(
       'metrics/meetings',
       :type=>2,
       :from => from,
       :to => to,
-      :page_size=>args.number )
+      :page_size=>30,
+      :page_number=>page_number )
     response = HTTParty.post( meet_url )
-    print "There are a total of: #{response['total_records']} for #{args.when} \n"
-    print "\n"
+    print "There are a total of: #{response['total_records']} for #{args.when} \n \n"
+    meetingList = response['meetings']
+
+    # Grow meeting until page count is last page
+    while response['page_number'] < response['page_count'] do
+      page_number += 1
+      print "Requesting Page: #{page_number}"
+      meet_url = zoomAPI(
+        'metrics/meetings',
+        :type=>2,
+        :from => from,
+        :to => to,
+        :page_size=>30,
+        :page_number=>page_number )
+      response = HTTParty.post( meet_url )
+      meetingList += response['meetings']
+      print " Meeting size is now: #{meetingList.size} \n"
+    end
+    binding.pry
     if response.code == 200
       # CREATE meetings in DB
       response['meetings'].each do |item|
@@ -166,9 +189,8 @@ namespace :zoom do
         end
       end
     else
-      print "There was an issue with : #{meeting['uuid']} as the participants are empty \n"
-      print "\n"
-      print "\n"
+      print "There was an issue with makeing the API request \n \n"
+
     end
   end
 
