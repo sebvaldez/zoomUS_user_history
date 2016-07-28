@@ -136,10 +136,9 @@ namespace :zoom do
       meetingList += response['meetings']
       print " Meeting size is now: #{meetingList.size} \n"
     end
-    binding.pry
     if response.code == 200
       # CREATE meetings in DB
-      response['meetings'].each do |item|
+      meetingList.each do |item|
         meeting = Meeting.new.extend(MeetingRepresenter).from_hash(item)
         print "\n"
         print "***** MEETING ***** \n"
