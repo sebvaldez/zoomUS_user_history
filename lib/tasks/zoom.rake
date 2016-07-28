@@ -138,7 +138,7 @@ namespace :zoom do
     end
     if response.code == 200
       # CREATE meetings in DB
-      response['meetings'].each do |item|
+      meetingList.each do |item|
         meeting = Meeting.new.extend(MeetingRepresenter).from_hash(item)
         print "\n"
         print "***** MEETING ***** \n"
