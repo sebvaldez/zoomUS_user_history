@@ -220,7 +220,7 @@ namespace :zoom do
 
   desc "Update the :status IF users does not exit from zoom, add IF vise versa"
   task :update_all_users => :environment do
-    print "UPDATING ALL LOCAL DB USERS\n\n"
+    print "UPDATING ALL DB USERS\n\n"
     # Get Total users
     url = zoomAPI('user/list', :page_size=>1)
     response = HTTParty.post( url )
@@ -239,16 +239,15 @@ namespace :zoom do
     # Set all Local DB users :status to false
     User.all.each.map{ |user| user.update_attribute(:status, false) }
     og_count = User.all.size
-    print "#{og_count} Local DB users status's were mafe false \n"
+    print "#{og_count} DB users status's were made false \n"
 
     # Map and update status on user
     new_users = [] # array to hold ids of new users
-    not_found = 0
+    # Add ID if not found in local database
     all_zoom_ids.map do |id|
 
       unless user = User.all.find_by(:zoom_id=> id)
         print "#{id} | NOT FOUND, STATUS FALSE | \n\n"
-        not_found = not_found + 1
         new_users.push(id)
       else
         user.update_attribute(:status, true)        
