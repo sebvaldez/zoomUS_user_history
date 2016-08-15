@@ -115,7 +115,7 @@ namespace :zoom do
       :type=>2,
       :from => from,
       :to => to,
-      :page_size=>30,
+      :page_size=>100,
       :page_number=>page_number )
     response = HTTParty.post( meet_url )
     print "There are a total of: #{response['total_records']} for #{args.when} \n \n"
