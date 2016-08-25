@@ -1,0 +1,51 @@
+<div id="zoom-user-lookup">
+	<%= form_tag search_users_path, remote: true, method: :get, id: 'zoom-user-lookup-form' do %>
+	<div class="form-group row no-padding text-center col-md-12">
+		<div class="col-md-8">
+			<%= text_field_tag :search_param, params[:search_param], placeholder: "First name, Last name or Email.", autofocus: true, class: "form-control search-box input-lg" %>
+		</div>
+		<div class="col-md-2">
+			<%= button_tag(type: :submit, class: 'btn btn-info btn-lg') do %>
+				<i class="fa fa-search"></i> Search for zoom user
+			<% end %>
+		</div>
+	</div>
+	<% end %>
+
+	<!--  REDER SPINNER -->
+	<% if @users %>
+			<% if @users.size > 0 %>
+				<div id="zoom-lookup-results" class="well results-block col-md-10">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th><strong>Name: </strong></th>
+								<th><strong>Email: </strong></th>
+								<th><strong>Status: </strong></th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<% @users.each do |user| %>
+								<tr>
+									<td><%= user.first_name %></td>
+									<td><%= user.email %></td>
+									<td><%= user.status %></td>
+									<td>
+										<% if user.status == true %>
+											<%= link_to "View", user_path(user), class: 'btn btn-success btn-xs' %>
+										<% end %>
+									</td>
+								</tr>
+							<% end %>
+						</tbody>
+					</table>
+				</div>
+			<% else %>
+				<p class="lead col-md-12">
+					No zoom users found.
+				</p>
+			<% end %>
+		<% end %>
+		<div class="zoom-user-lookup-errors"></div>
+</div>

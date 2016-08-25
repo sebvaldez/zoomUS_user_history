@@ -273,7 +273,7 @@ namespace :zoom do
         print "#{new_user['first_name']} Create in Local Database!\n\n"
       else
         print "#{new_user.first_name} | #{new_user.zoom_id} NOT ADDED!\n"
-        print "#{new_user['email'].split("@")[0]} - > #{new_user.errors.messages}\n\n"
+        print "#{new_user.errors.messages}\n\n"
       end
     end
 

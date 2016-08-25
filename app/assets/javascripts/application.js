@@ -13,4 +13,28 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require bootstrap-sprockets
 //= require_tree .
+
+
+var init_zoom_user_lookup;
+
+init_zoom_user_lookup = function() {
+
+	$("#zoom-user-lookup-form").on('ajax:success', function(event, data, status) {
+		console.log("i have success");
+		$("#zoom-user-lookup").replaceWith(data);
+		init_zoom_user_lookup();
+	});
+
+	$("#zoom-user-lookup-form").on("ajax:error", function(event, data, status) {
+		$("#zoom-user-lookup-results").replaceWith(' ');
+		$("#zoom-user-lookup-errors").replaceWith("Zoom User was not located!");
+	});
+
+}
+
+
+$(document).ready(function() {
+	init_zoom_user_lookup();
+});

@@ -1,0 +1,35 @@
+<h1>Users details</h1>
+<div align="center">
+	<h2><%= @user.first_name %></h2>
+
+	<% if @user.status == true %>
+		<p>Pro Account</p>
+	<% else %>
+		<p>Basic Account</p>
+	<% end %>
+</div>
+<h3> Personal Meeting ID: <%= @user.pmi %></h3>
+
+<div>
+	<h3>Total meetings: <%= @user.meetings.count %></h3>
+</div>
+
+	<table class="table table-striped">
+		<tr>
+			<th>ID of meeting:</th>
+			<th>Start time:</th>
+			<th>Participant Count:</th>
+		</tr>
+
+		<tbody>
+			<% @user.meetings.each do |meeting| %>
+				<tr>
+					<td><%= meeting.id_of_meeting %></td>
+					<td><%= meeting.start_time.strftime("%B %a %d %r") %></td>
+					<td>
+							<%= link_to "#{meeting.participants.count}", "#" %>
+					</td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
