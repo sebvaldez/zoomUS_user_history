@@ -1,14 +1,40 @@
 <h1>Users details</h1>
 <div align="center">
-	<h2><%= @user.first_name %></h2>
+	<h2><%= @user.full_name %></h2>
 
 	<% if @user.status == true %>
-		<p>Pro Account</p>
+		<p>Active zoom user</p>
 	<% else %>
-		<p>Basic Account</p>
+		<p>Deactivated Account</p>
 	<% end %>
+
+	<p><%= @user.email %></p>
 </div>
-<h3> Personal Meeting ID: <%= @user.pmi %></h3>
+
+<h4> Personal Meeting ID: <%= @user.pmi %></h4><br>
+
+<%= label_tag('Large Meeting') %><br>
+<% if @user.enable_large %>
+	<%= form_for @user do |f| %>
+
+			<%= f.radio_button :large_capacity, 100 ,:value => 100 %>
+			<%= label_tag('100') %>
+
+			<%= f.radio_button :large_capacity, 200 ,:value => 200 %>
+			<%= label_tag('200') %>
+
+			<%= f.radio_button :large_capacity, 300 ,:value => 300 %>
+			<%= label_tag('300') %>
+
+			<%= f.radio_button :large_capacity, 500 ,:value => 500 %>
+			<%= label_tag('500') %>	
+	<% end %>
+<% else %>
+	<p> Large meeting not enabled </p>
+<% end %>
+
+<br>
+<hr>
 
 <div>
 	<h3>Total meetings: <%= @user.meetings.count %></h3>
@@ -27,9 +53,55 @@
 					<td><%= meeting.id_of_meeting %></td>
 					<td><%= meeting.start_time.strftime("%B %a %d %r") %></td>
 					<td>
-							<%= link_to "#{meeting.participants.count}", "#" %>
+					<!-- this link should send the uuid / get the list of participants via ajax on click -->
+							<%= link_to "#{meeting.participants.count}", meeting_participants_path(meeting),
+										 data: { toggle: 'modal', target: '.bs-example-modal-lg'} %>
 					</td>
 				</tr>
 			<% end %>
 		</tbody>
 	</table>
+
+			<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+			  <div class="modal-dialog modal-lg" role="document">
+			    <div class="modal-content">
+			    <div class="container">
+			    	
+			      <p>List of participants</p> <br>
+
+			      <p>view participants in database and see their meeting</p><br>
+
+			      <p>devices used on this call</p><br>
+
+			      <p>heat map of the participants in this meeting</p><br>
+			    	
+			    </div>
+
+
+			    </div>
+			  </div>
+			</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

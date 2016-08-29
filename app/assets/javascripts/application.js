@@ -21,7 +21,6 @@ var init_zoom_user_lookup;
 init_zoom_user_lookup = function() {
 
 	$("#zoom-user-lookup-form").on('ajax:success', function(event, data, status) {
-		console.log("i have success");
 		$("#zoom-user-lookup").replaceWith(data);
 		init_zoom_user_lookup();
 	});
@@ -32,6 +31,7 @@ init_zoom_user_lookup = function() {
 	});
 
 }
+
 
 
 $(document).ready(function() {

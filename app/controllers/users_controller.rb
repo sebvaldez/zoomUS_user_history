@@ -6,9 +6,9 @@ class UsersController < ApplicationController
 
 	def search
 		@users = User.search(params[:search_param])
-
 		if @users
 			render partial: 'lookup'
+
 		else
 			render status: :not_found, nothing: true
 		end
@@ -17,5 +17,6 @@ class UsersController < ApplicationController
 	def show
 		@user = User.find(params[:id])
 	end
+
 
 end
