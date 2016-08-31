@@ -29,11 +29,64 @@ init_zoom_user_lookup = function() {
 		$("#zoom-user-lookup-results").replaceWith(' ');
 		$("#zoom-user-lookup-errors").replaceWith("Zoom User was not located!");
 	});
+}
+
+var list_of_participants = function() {
+	$('.search-participants-list').on('ajax:success', function(event, data, status){
+		$('#modal-results').replaceWith(data);
+		list_of_participants();
+	});
+
+	$('#search-participants-list').on('ajax:error', function(event, data, status){
+		console.log(data);
+		console.log("there was an error");
+	});
+}
+
+// Test manual ajax call
+var get_list = function(meeting_id) {
+
+	var url = '/meeting_participants/' + meeting_id;
+
+	$.ajax({
+		type: 'GET',
+		url: url,
+		success: function(response){
+			$('#modal-results').append(response);
+		},
+		error: function(response){
+			console.log('the was an error with requesting meeting_id');
+		}
+	});
 
 }
 
 
-
 $(document).ready(function() {
+
+	// Run for user look up
 	init_zoom_user_lookup();
+
+	// init ajax success if participant count was clicked
+	document.getElementById('users-meetings').addEventListener('click', function(e){
+		e.preventDefault();
+		if (e.target.nodeName === 'A') {
+			var uuid = e.target.href.split('/').slice(-1)[0];
+			get_list(uuid);
+		}
+	});
+
+	// Clear out modal on close
+	$('.modal').on('hidden.bs.modal', function () {
+    $('#modal-results').empty();
+	});
+
 });
+
+
+
+
+
+
+
+

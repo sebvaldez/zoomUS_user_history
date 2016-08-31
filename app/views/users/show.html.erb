@@ -47,60 +47,27 @@
 			<th>Participant Count:</th>
 		</tr>
 
-		<tbody>
+		<tbody id="users-meetings">
 			<% @user.meetings.each do |meeting| %>
 				<tr>
 					<td><%= meeting.id_of_meeting %></td>
 					<td><%= meeting.start_time.strftime("%B %a %d %r") %></td>
 					<td>
 					<!-- this link should send the uuid / get the list of participants via ajax on click -->
-							<%= link_to "#{meeting.participants.count}", meeting_participants_path(meeting),
-										 data: { toggle: 'modal', target: '.bs-example-modal-lg'} %>
+							<%= link_to "#{meeting.participants.count}", participants_list_path(meeting.uuid),
+									data: {remote: true, method: :get, toggle: 'modal', target: '.bs-example-modal-lg'},
+									class: 'search-participants-list' %>
 					</td>
 				</tr>
 			<% end %>
 		</tbody>
 	</table>
 
-			<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-			  <div class="modal-dialog modal-lg" role="document">
-			    <div class="modal-content">
-			    <div class="container">
-			    	
-			      <p>List of participants</p> <br>
-
-			      <p>view participants in database and see their meeting</p><br>
-
-			      <p>devices used on this call</p><br>
-
-			      <p>heat map of the participants in this meeting</p><br>
-			    	
-			    </div>
-
-
-			    </div>
-			  </div>
-			</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+		<div class="modal-dialog modal-lg" role="document">
+			<div id='modal-results'></div>
+		</div>
+	</div>
 
 
 

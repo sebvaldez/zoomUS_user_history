@@ -1,0 +1,25 @@
+<div id="modal-list" class="modal-content">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+			<h3 class="modal-title">Participant List</h3>
+	</div>
+	<div class="modal-body">
+		<table id="list-table" class="table table-striped">
+			<thead>
+				<th>User name:</th>
+				<th>Device</th>
+				<th>Join time:</th>
+			</thead>
+			<tbody>
+				<% @participants.each do |user| %>
+					<tr>
+						<td><%= user.user_name %></td>
+						<td><%= user.device %></td>
+						<td><%= user.join_time.strftime("%r") %></td>
+					</tr>
+				<% end %> 
+			</tbody>
+		</table>
+	</div>

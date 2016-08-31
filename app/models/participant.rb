@@ -4,4 +4,18 @@ class Participant < ActiveRecord::Base
 
 	belongs_to :meetings
 
+	def self.search(param)
+		return Participant.none if param.blank?
+		(meeting_matches(param)).to_a
+	end
+
+	def self.meeting_matches(param)
+		matches('uuid', param)
+	end
+
+	def self.matches(fieldname, param)
+		where("#{fieldname} = ?", param)
+	end
+
 end
+

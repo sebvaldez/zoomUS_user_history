@@ -6,8 +6,10 @@ Rails.application.routes.draw do
   get "find_users", to: 'users#find_users'
   get 'search_users', to: 'users#search'
 
-  resources :meetings do
-  	resources :participants
-  end
+ 	resources :meetings do
+ 		resources :participants
+ 	end
+
+  get 'meeting_participants/:uuid', to: 'participants#search', as: 'participants_list'
   
 end
