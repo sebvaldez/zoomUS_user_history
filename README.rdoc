@@ -1,28 +1,41 @@
-== README
+== SolarZoomHistory
+---
+This project is an internal application that provides a front end to a records database.
+contains: 
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+1. Users
+2. Meetings
+3. Participant
 
-Things you may want to cover:
+== Contribution
+---
+Please contact either of the authors below to gain access to production
 
-* Ruby version
+== Rake task usage
+---
+This project uses serveral rake tasks to update production. The future shall make this automated.
+* Get a users zoom id:
+	cap production deploy:invoke task=zoom:id_by_email[example@solarcity.com]
 
-* System dependencies
+* Load lasted users:
+	cap production deploy:invoke task=zoom:load_users[]
 
-* Configuration
+* Update Users table (use in regards to after account clean-up):
+	cap production deploy:invoke task=zoom:update_all_users
 
-* Database creation
+* Load meetings for a specifieced month (can accept month name or abbrivaition of month, will grab participants as well):
+	cap production deploy:invoke task=zoom:get_meetings[month,all/today]
 
-* Database initialization
+* Associate Meetings to Users:
+	cap production deploy:invoke task=zoom:link_usermeetings
 
-* How to run the test suite
+* Associate Meeting table to Participants:
+	cap production deploy:invoke task=zoom:link_meetingparticipants
 
-* Services (job queues, cache servers, search engines, etc.)
+== Authors
+---
+{Sebastian Valdez}[svaldez@solarcity.com], Initial work.
+{Randy Avalos}[ravalos@solrcity.com], Inintail work in addition to R algorithms.
+---
 
-* Deployment instructions
 
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
