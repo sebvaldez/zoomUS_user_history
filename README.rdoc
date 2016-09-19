@@ -1,5 +1,4 @@
 == SolarZoomHistory
----
 This project is an internal application that provides a front end to a records database.
 contains: 
 
@@ -8,34 +7,34 @@ contains:
 3. Participant
 
 == Contribution
----
 Please contact either of the authors below to gain access to production
 
 == Rake task usage
----
 This project uses serveral rake tasks to update production. The future shall make this automated.
-* Get a users zoom id:
-	cap production deploy:invoke task=zoom:id_by_email[example@solarcity.com]
 
-* Load lasted users:
-	cap production deploy:invoke task=zoom:load_users[]
+Get a users zoom id:
+		cap production deploy:invoke task=zoom:id_by_email[example@solarcity.com]
 
-* Update Users table (use in regards to after account clean-up):
-	cap production deploy:invoke task=zoom:update_all_users
+Load lasted users:
+		cap production deploy:invoke task=zoom:load_users[]
 
-* Load meetings for a specifieced month (can accept month name or abbrivaition of month, will grab participants as well):
-	cap production deploy:invoke task=zoom:get_meetings[month,all/today]
+Update Users table (use in regards to after account clean-up):
+		cap production deploy:invoke task=zoom:update_all_users
 
-* Associate Meetings to Users:
-	cap production deploy:invoke task=zoom:link_usermeetings
+Load meetings for a specifieced month (can accept month name or abbrivaition of month, will grab participants as well):
+		cap production deploy:invoke task=zoom:get_meetings[month,all/today]
 
-* Associate Meeting table to Participants:
-	cap production deploy:invoke task=zoom:link_meetingparticipants
+Associate Meetings to Users:
+		cap production deploy:invoke task=zoom:link_usermeetings
+
+Associate Meeting table to Participants:
+		cap production deploy:invoke task=zoom:link_meetingparticipants
 
 == Authors
----
+
 {Sebastian Valdez}[svaldez@solarcity.com], Initial work.
 {Randy Avalos}[ravalos@solrcity.com], Inintail work in addition to R algorithms.
+
 ---
 
 
