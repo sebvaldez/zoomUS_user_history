@@ -13,22 +13,22 @@ Please contact either of the authors below to gain access to production
 This project uses serveral rake tasks to update production. The future shall make this automated.
 
 Get a users zoom id:
-	`cap production deploy:invoke task=zoom:id_by_email[example@solarcity.com]`
+  cap production deploy:invoke task=zoom:id_by_email[example@solarcity.com]
 
 #Load lasted users:
 	cap production deploy:invoke task=zoom:load_users[]
 
 Update Users table (use in regards to after account clean-up):
-	`cap production deploy:invoke task=zoom:update_all_users`
+  cap production deploy:invoke task=zoom:update_all_users
 
 Load meetings for a specifieced month (can accept month name or abbrivaition of month, will grab participants as well):
-	`cap production deploy:invoke task=zoom:get_meetings[month,all/today]`
+  cap production deploy:invoke task=zoom:get_meetings[month,all/today]
 
 Associate Meetings to Users:
-	`cap production deploy:invoke task=zoom:link_usermeetings`
+  cap production deploy:invoke task=zoom:link_usermeetings
 
 Associate Meeting table to Participants:
-	`cap production deploy:invoke task=zoom:link_meetingparticipants`
+  cap production deploy:invoke task=zoom:link_meetingparticipants
 
 == Authors
 
