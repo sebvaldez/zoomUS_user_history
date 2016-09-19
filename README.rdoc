@@ -42,7 +42,7 @@ Associate Meeting table to Participants:
 
 {Sebastian Valdez}[mailto:svaldez@solarcity.com], Initial work.
 
-{Randy Avalos}[mailto:ravalos@solrcity.com], Initial work; In addition to R algorithms.
+{Randy Avalos}[mailto:ravalos@solrcity.com], Initial work; In addition to {R algorithms}[https://github.com/R-Avalos/Zoom-Video-Conference-Management].
 
 ---
 
