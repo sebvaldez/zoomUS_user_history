@@ -32,8 +32,8 @@ Associate Meeting table to Participants:
 
 == Authors
 
-{Sebastian Valdez}[svaldez@solarcity.com], Initial work.
-{Randy Avalos}[ravalos@solrcity.com], Inintail work in addition to R algorithms.
+{Sebastian Valdez}[mailto:svaldez@solarcity.com], Initial work.
+{Randy Avalos}[mailto:ravalos@solrcity.com], Inintail work in addition to R algorithms.
 
 ---
 
