@@ -1,4 +1,4 @@
-== SolarZoomHistory
+== ZoomUS_user_history
 This project is an internal application that provides a front end to a records database.
 contains: 
 
@@ -40,10 +40,9 @@ Associate Meeting table to Participants:
 
 == Authors
 
-{Sebastian Valdez}[mailto:svaldez@solarcity.com], Initial work.
+{Sebastian Valdez}[mailto:svaldez@solarcity.com], Initial work.architect/design
 
 {Randy Avalos}[mailto:ravalos@solrcity.com], Initial work; In addition to {R algorithms}[https://github.com/R-Avalos/Zoom-Video-Conference-Management].
 
 ---
-
 
